@@ -22,5 +22,6 @@ class GenreSearchStrategy(SearchStrategy):
 
     def search(self, books):
         return [book for book in books if self.genre in book.genre]
+        fdsfd
 
 
