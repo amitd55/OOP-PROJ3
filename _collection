@@ -1,0 +1,205 @@
+from Book import Book
+from FileManagement import FileManagement
+import pandas as pd
+
+class BookCollection:
+    def __init__(self, file_path='Books.csv'):
+        self.books=[]
+        self.file_path = file_path
+        self._load_books_from_file()
+
+
+
+    @classmethod
+    def from_row(cls, row):
+        return Book(
+            name=row['title'],
+            author=row['author'],
+            year=row['year'],
+            copies=row['copies'],
+            genre=row['genre'],
+            is_loaned=row['is_loaned']
+        )
+
+    def _load_books_from_file(self):
+        try:
+            books_df = FileManagement.read_csv(self.file_path)
+            self.books = [BookCollection.from_row(row) for _, row in books_df.iterrows()]
+        except FileNotFoundError:
+            print(f"File {self.file_path} not found. Starting with an empty collection.")
+        except Exception as e:
+            print(f"Error loading books: {e}")
+
+    def __iter__(self):
+        return iter(self.books)
+
+    def find_book(self, name, author=None, year=None):
+        for book in self.books:
+            if book.name == name and (author is None or book.author == author) and (year is None or book.year == year):
+                return book
+        return None
+
+    def search(self,strategy):
+        results=strategy.search(self.books)
+        return BaseBookIterator(results)
+
+
+
+    def add_book(self, name, author, year, copies, genre):
+        for book in self.books:
+
+            if book.name == name and book.author == author and book.year == year:
+                book.update_copies(copies)
+                is_loaned = "Yes" if book.is_loaned else "No"
+
+                # Update Books.csv
+                update_column={'is_loaned':is_loaned,
+                                'copies':book.copies}
+                FileManagement.update_csv('Books.csv', book.book_identification, update_column)
+
+                # Remove from loaned_books.csv if copies are available
+                if book.available_copies() > 0:
+                    FileManagement.delete_row('loaned_books.csv',book.book_identification())
+
+                search_dict = book.book_identification()
+                matching_rows = FileManagement.search('available_books.csv', search_dict)
+                if not matching_rows.empty:
+
+                    # Update available copies if book exists
+                    new_copies = matching_rows['available_copies'].iloc[0] + copies
+                    update_column = {'available_copies': new_copies}
+                    FileManagement.update_csv('available_books.csv',book.book_identification(),update_column)
+
+                else:
+                    book_data=book.to_dict()
+                    book_data['available_copies']=book.available_copies()
+                    book_data['is_loaned']="No"
+                    FileManagement.append_file('available_books.csv',book_data)
+                return
+
+        # Add a new book if it doesn't already exist
+        new_book = Book(name, author, year, copies, genre, is_loaned="No")
+        book_data = new_book.to_dict()
+        self.books.append(new_book)
+        FileManagement.append_file('Books.csv',book_data)
+
+        book_data['available_copies'] = new_book.copies
+        book_data['is_loaned'] = "No"
+        FileManagement.append_file('available_books.csv', book_data)
+
+
+
+    def delete_book(self, name, author=None, year=None):
+        book = self.find_book(name, author, year)
+        if not book:
+            print(f"Book '{name}' not found in the collection.")
+            return
+
+        self.books.remove(book) #the waiting list also removed, ADD A MESSAGE TO THE CUSTOMERS WAITING!
+        FileManagement.delete_row('Books.csv',book.book_identification())
+        FileManagement.delete_row('available_books.csv',book.book_identification())
+        FileManagement.delete_row('loaned_books.csv',book.book_identification())
+        print(f"Book '{name}' has been removed from all records.")
+
+
+
+    def update_files_after_add(self):
+
+
+
+
+
+
+
+    def update_files_after_delete(self, book):
+        FileManagement.delete_row('Books.csv', book.book_identification())
+        FileManagement.delete_row('available_books.csv', book.book_identification())
+        FileManagement.delete_row('loaned_books.csv', book.book_identification())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def get_top_10_popular_books(self):
+        sorted_books = sorted(self.books, key=lambda book: book.popularity_counter, reverse=True)
+        return sorted_books[:10]
+
+    def print_all_files(self):
+        print("\n=== Books.csv ===")
+        self.print_file('Books.csv')
+
+        print("\n=== Loaned_Books.csv ===")
+        self.print_file('loaned_books.csv')
+
+        print("\n=== Available_Books.csv ===")
+        self.print_file('available_books.csv')
+
+    @staticmethod
+    def print_file(file_name):
+        try:
+            pd.set_option('display.max_columns', None)  # Ensure all columns are displayed
+            df = pd.read_csv(file_name)
+            print(df)
+        except FileNotFoundError:
+            print(f"{file_name} not found.")
+        except Exception as e:
+            print(f"Error reading {file_name}: {e}")
+
+
+
+
+
+class BaseBookIterator:
+    def __init__(self, items):
+        self.items = items
+        self.index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index < len(self.items):
+            item = self.items[self.index]
+            self.index += 1
+            return item
+        raise StopIteration
+
+    # def __str__(self):
+    #     return "\n".join(str(item) for item in self.items)
+    #
+    # def get_item(self, index):
+    #     if 0 <= index < len(self.items):
+    #         return self.items[index]
+    #     raise IndexError("Index out of range")
+
+    # def reset(self):
+    #     self.index = 0
+
+    # def has_next(self):
+    #     return self.index < len(self.items)
+
+    # def remove(self):
+    #     if 0 <= self.index - 1 < len(self.items):
+    #         self.items.pop(self.index - 1)
+    #         self.index -= 1
+    #     else:
+    #         raise IndexError("No item to remove")
+
+
+
