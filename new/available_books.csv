@@ -1,0 +1,3 @@
+title,author,genre,year,copies,is_loaned
+Python Programming,John Doe,Programming,2021,5,False
+Data Science 101,Jane Smith,Data Science,2020,3,False
