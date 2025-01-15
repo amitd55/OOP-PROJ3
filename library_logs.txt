@@ -1,0 +1,223 @@
+- Add Book successfully
+- Add Book successfully
+- Add Book successfully
+- Remove Book successfully
+- Add Book successfully
+- Add Book successfully
+- Add Book successfully
+- Remove Book successfully
+- Borrow Book successfully
+- Borrow Book fail
+- Borrow Book fail
+- Return Book fail
+- Return Book fail
+- Return Book fail
+- Borrow Book successfully
+- Borrow Book fail
+- Borrow Book fail
+- Return Book fail
+- Return Book fail
+- Return Book fail
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book fail
+- Return Book successfully
+- Return Book successfully
+- Return Book fail
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book fail
+- Return Book successfully
+- Return Book successfully
+- Return Book fail
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book fail
+- Return Book successfully
+- Return Book successfully
+- Return Book fail
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book fail
+- Return Book successfully
+- Return Book successfully
+- Return Book fail
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book fail
+- Return Book successfully
+- Return Book successfully
+- Return Book fail
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book fail
+- Return Book successfully
+- Return Book successfully
+- Return Book fail
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book fail
+- Return Book successfully
+- Return Book successfully
+- Return Book fail
+- Borrow Book successfully
+- Borrow Book fail
+- Borrow Book fail
+- Return Book fail
+- Return Book fail
+- Return Book fail
+- Borrow Book fail
+- Borrow Book fail
+- Borrow Book fail
+- Return Book fail
+- Return Book fail
+- Return Book fail
+- Borrow Book fail
+- Borrow Book fail
+- Borrow Book fail
+- Return Book fail
+- Return Book fail
+- Return Book fail
+- Borrow Book successfully
+- Borrow Book successfully
+- Return Book successfully
+- Return Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Add Book successfully
+- Add Book successfully
+- Add Book successfully
+- Remove Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Return Book successfully
+- Return Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Return Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Return Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Borrow Book successfully
+- Return Book successfully
+- Borrow Book successfully
+- Display Books fail: 'SearchManager' object has no attribute 'filters'
+- Display Books fail: 'SearchManager' object has no attribute 'filters'
+- Display Books fail: 'SearchManager' object has no attribute 'filters'
+- Display Books fail: 'SearchManager' object has no attribute 'filters'
+- Display Books fail: 'SearchManager' object has no attribute 'filters'
+- Search successfully
+- Perform Search successfully
+- Search successfully
+- Perform Search successfully
+- Search successfully
+- Perform Search successfully
+- Search fail
+- Perform Search successfully
+- Display Books successfully
+- Display Books successfully
+- Display Books successfully
+- Display Books successfully
+- Display Books successfully
+- Display Books successfully
+- Search successfully
+- Perform Search successfully
+- Search successfully
+- Perform Search successfully
+- Search successfully
+- Perform Search successfully
+- Search fail
+- Perform Search successfully
+- Display Books successfully
+- Display Books successfully
+- Display Books successfully
+- Display Books successfully
+- Display Books successfully
+- Search successfully
+- Perform Search successfully
+- Search successfully
+- Perform Search successfully
+- Search successfully
+- Perform Search successfully
+- Search fail
+- Perform Search successfully
+- Display Books successfully
+- Display Books successfully
+- Display Books successfully
+- Display Books successfully
+- Display Books successfully
+- Search fail
+- Perform Search successfully
+- Search successfully
+- Perform Search successfully
+- Search successfully
+- Perform Search successfully
+- Search successfully
+- Perform Search successfully
+- Search successfully
+- Perform Search successfully
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search failed: The books argument must be an iterable of Book objects.
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Display Books Successfully completed
+- Search Failed
+- Perform Search Failed
+- Search Successfully completed
+- Perform Search Successfully completed
+- Display Books failed: Invalid filter type. Use 'all', 'popular', 'available', or 'loaned'.
+- Perform Search failed: Invalid search type: invalid
+- Search Successfully completed
+- Perform Search Successfully completed
+- Search Successfully completed
+- Perform Search Successfully completed

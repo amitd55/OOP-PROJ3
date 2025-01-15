@@ -1,0 +1,22 @@
+Search book "J.K. Rowling" by author completed successfully
+Search book "Fantasy" by genre completed successfully
+Search book "Harry Potter" by title completed successfully
+Search book "Nonexistent Book" by title failed
+Search book "J.K. Rowling" by author completed successfully
+Search book "Fantasy" by genre completed successfully
+Search book "Harry Potter" by title completed successfully
+Search book "Nonexistent Book" by title failed
+Search book "J.K. Rowling" by author completed successfully
+Search book "Fantasy" by genre completed successfully
+Search book "Harry Potter" by title completed successfully
+Search book "Nonexistent Book" by title failed
+Search book "Unknown Book" by title failed
+Search book "J.K. Rowling" by author completed successfully
+Search book "Fantasy" by genre completed successfully
+Search book "Harry Potter" by title completed successfully
+Search book "Harry Potter" by title completed successfully
+Search book "Harry Potter" by title completed successfully
+Search book "Harry Potter" by title completed successfully
+Search book "Harry Potter" by title completed successfully
+Search book "Harry Potter" by title completed successfully
+Search book "Harry Potter" by title completed successfully
