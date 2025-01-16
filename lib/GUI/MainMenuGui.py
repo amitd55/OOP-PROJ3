@@ -1,11 +1,11 @@
+# MainMenuGui.py
 import tkinter as tk
 from BookManagementGui import BookManagementGui
-from GUI.SearchAndDisplayGui import SearchBooksGui,DisplayBooksGui
+from GUI.SearchAndDisplayGui import SearchBooksGui, DisplayBooksGui
 from BorrowReturnGui import BorrowReturnGui
 from GUI.AuthGui import AuthGui
 from classes.BookManager import BookManager
 from classes.BorrowingManager import BorrowingManager
-
 
 class MainMenuGui:
     def __init__(self, user=None):
@@ -57,7 +57,7 @@ class MainMenuGui:
     def open_search_books_gui(self):
         self.root.withdraw()
         try:
-            app = SearchBooksGui()
+            app = SearchBooksGui(main_menu=self.root)
             app.run()
         except Exception as e:
             self.root.deiconify()
@@ -66,7 +66,7 @@ class MainMenuGui:
     def open_view_books_gui(self):
         self.root.withdraw()
         try:
-            app = DisplayBooksGui()
+            app = DisplayBooksGui(main_menu=self.root)
             app.run()
         except Exception as e:
             self.root.deiconify()
@@ -75,8 +75,8 @@ class MainMenuGui:
     def open_borrow_book_gui(self):
         self.root.withdraw()
         try:
-            app = BorrowReturnGui(self.borrowing_manager, mode="borrow", return_callback=self.return_to_main_menu)
-            app.run("borrow")
+            app = BorrowReturnGui(self.borrowing_manager, return_callback=self.return_to_main_menu)
+            app.run("borrow")  # Pass mode here
         except Exception as e:
             self.root.deiconify()
             tk.messagebox.showerror("Error", f"Failed to open Lend Book window: {e}")
@@ -84,17 +84,16 @@ class MainMenuGui:
     def open_return_book_gui(self):
         self.root.withdraw()
         try:
-            app = BorrowReturnGui(self.borrowing_manager, mode="return", return_callback=self.return_to_main_menu)
-            app.run("return")
+            app = BorrowReturnGui(self.borrowing_manager, return_callback=self.return_to_main_menu)
+            app.run("return")  # Pass mode here
         except Exception as e:
             self.root.deiconify()
             tk.messagebox.showerror("Error", f"Failed to open Return Book window: {e}")
 
     def open_logout(self):
-        """Handle logout and redirect to authentication."""
         self.root.withdraw()  # Hide the current window instead of destroying it
         try:
-            auth_app = AuthGui(on_success=self.open_main_menu)
+            auth_app = AuthGui(on_success=self.reopen_main_menu)  # Update callback
             auth_app.run("login")
         except Exception as e:
             self.root.deiconify()
@@ -103,11 +102,16 @@ class MainMenuGui:
     def return_to_main_menu(self):
         self.root.deiconify()  # Show the main menu window
 
+    def reopen_main_menu(self, user):
+        """Reopen the main menu for the given user."""
+        self.user = user  # Update the user
+        self.build_gui()  # Rebuild the main menu
+        self.root.deiconify()
+
     def run(self):
         self.root.mainloop()
 
 if __name__ == "__main__":
-    # Start with the authentication GUI
     try:
         auth_app = AuthGui(on_success=MainMenuGui)
         auth_app.run("login")

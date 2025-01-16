@@ -1,4 +1,15 @@
-- Display Books Failed
+- Add Book Successfully completed
+- Remove Book Successfully completed
+- Add Book Successfully completed
+- Remove Book Successfully completed
+- Remove Book Successfully completed
+- Remove Book Successfully completed
+- Remove Book Successfully completed
+- Remove Book Successfully completed
+- Remove Book Failed
+- Remove Book Failed
+- Remove Book Failed
+- Remove Book Successfully completed
 - Display Books Successfully completed
 - Display Books Successfully completed
 - Display Books Successfully completed
@@ -12,27 +23,3 @@
 - Display Books Successfully completed
 - Display Books Successfully completed
 - Display Books Successfully completed
-- Display Books Successfully completed
-- Display Books Successfully completed
-- Display Books Successfully completed
-- Display Books Successfully completed
-- Search Successfully completed
-- Perform Search Successfully completed
-- Search Failed
-- Perform Search Failed
-- Search Successfully completed
-- Perform Search Successfully completed
-- Search Successfully completed
-- Perform Search Successfully completed
-- Search Successfully completed
-- Perform Search Successfully completed
-- Search Successfully completed
-- Perform Search Successfully completed
-- Search Successfully completed
-- Perform Search Successfully completed
-- Search Successfully completed
-- Perform Search Successfully completed
-- Search Failed
-- Perform Search Failed
-- Search Successfully completed
-- Perform Search Successfully completed

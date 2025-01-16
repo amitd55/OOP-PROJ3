@@ -5,8 +5,8 @@ from classes.BookManager import BookManager
 from classes.Logger import Logger
 
 class DisplayBooksGui:
-    def __init__(self, return_callback=None):
-        self.return_callback = return_callback  # Store the return callback
+    def __init__(self, main_menu=None):
+        self.main_menu = main_menu  # Store the main menu window
         self.logger = Logger()
         self.book_manager = BookManager()
         self.search_manager = SearchManager(self.book_manager, self.logger)
@@ -25,7 +25,6 @@ class DisplayBooksGui:
         display_frame = tk.Frame(self.root, bg="pink")
         tk.Label(display_frame, text="Display Books", font=("Arial", 16), bg="pink").pack(pady=20)
 
-        # Dropdown for filter type
         tk.Label(display_frame, text="Filter By", bg="pink").pack()
         self.filter_type_var = tk.StringVar(value="all")
         filter_dropdown = ttk.Combobox(display_frame, textvariable=self.filter_type_var, state="readonly")
@@ -56,8 +55,9 @@ class DisplayBooksGui:
         try:
             books_iterator = self.search_manager.display_books(filter_type)
             books = list(books_iterator)
+
             if not books:
-                messagebox.showinfo("Books", "No books available.")
+                messagebox.showinfo("Books", f"No books found for filter: {filter_type.capitalize()}.")
             else:
                 for book in books:
                     self.tree.insert("", tk.END, values=(
@@ -65,22 +65,28 @@ class DisplayBooksGui:
                         getattr(book, 'author', 'N/A'),
                         getattr(book, 'genre', 'N/A'),
                         getattr(book, 'year', 'N/A'),
-                        getattr(book, 'copies_available', 'N/A')
+                        getattr(book, 'copies', 'N/A')
                     ))
+
+                messagebox.showinfo("Books", f"{len(books)} books found for filter: {filter_type.capitalize()}.")
+
+        except ValueError as e:
+            messagebox.showerror("Error", f"Invalid filter type: {e}")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to load books: {e}")
 
     def return_to_main_menu(self):
-        self.root.withdraw()  # Hide the current window
-        if self.return_callback:
-            self.return_callback()  # Call the callback function to return to the main menu
+        self.root.destroy()  # Close the current window
+        if self.main_menu:
+            self.main_menu.deiconify()  # Show the main menu again
 
     def run(self):
         self.root.mainloop()
 
 
 class SearchBooksGui:
-    def __init__(self):
+    def __init__(self, main_menu=None):
+        self.main_menu = main_menu  # Store the main menu window
         self.logger = Logger()
         self.book_manager = BookManager()
         self.search_manager = SearchManager(self.book_manager, self.logger)
@@ -109,7 +115,6 @@ class SearchBooksGui:
         self.search_query_entry = tk.Entry(search_frame, width=30)
         self.search_query_entry.pack()
 
-        # Treeview widget for displaying results
         columns = ("Title", "Author", "Genre", "Year", "Available Copies")
         self.tree = ttk.Treeview(search_frame, columns=columns, show="headings")
         self.tree.pack(expand=True, fill="both")
@@ -118,14 +123,13 @@ class SearchBooksGui:
             self.tree.heading(col, text=col)
             self.tree.column(col, anchor=tk.CENTER)
 
-        # Scrollbar for the Treeview
         scrollbar = ttk.Scrollbar(search_frame, orient=tk.VERTICAL, command=self.tree.yview)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.tree.configure(yscroll=scrollbar.set)
 
         tk.Button(search_frame, text="Search", command=self.perform_search, width=15).pack(pady=20)
         tk.Button(search_frame, text="Return", command=self.return_to_main_menu, width=15).pack(pady=10)
-        tk.Button(search_frame, text="Close", command=self.close_window, width=15).pack(pady=10)
+        tk.Button(search_frame, text="Close", command=self.root.destroy, width=15).pack(pady=10)
 
         search_frame.pack(expand=True, fill="both")
 
@@ -137,14 +141,12 @@ class SearchBooksGui:
             messagebox.showerror("Error", "Please enter a query.")
             return
 
-        # Validate search type
         valid_search_types = ["title", "author", "genre", "year"]
         if search_type not in valid_search_types:
             messagebox.showerror("Error", f"Search failed: Invalid search type: {search_type}")
             return
 
         try:
-            # Clear previous Treeview entries
             self.tree.delete(*self.tree.get_children())
             results_iterator = self.search_manager.perform_search(query, search_type)
             results = list(results_iterator)
@@ -158,36 +160,22 @@ class SearchBooksGui:
                         getattr(book, 'author', 'N/A'),
                         getattr(book, 'genre', 'N/A'),
                         getattr(book, 'year', 'N/A'),
-                        getattr(book, 'copies_available', 'N/A')
+                        getattr(book, 'copies', 'N/A')
                     ))
         except Exception as e:
             messagebox.showerror("Error", f"Search failed: {e}")
 
     def return_to_main_menu(self):
-        """Handle return to main menu."""
-        print("Returning to main menu...")  # You can add logic for the main menu here
-        # Example of returning to the main menu
-        # If you have a MainMenuGui class, call it here:
-        # main_menu = MainMenuGui()
-        # main_menu.run()
-
-        # For now, reset the search window without destroying it
-        self.search_query_entry.delete(0, tk.END)
-        self.tree.delete(*self.tree.get_children())
-        self.search_type_var.set("title")  # Reset the filter to the default
+        self.root.destroy()
+        if self.main_menu:
+            self.main_menu.deiconify()
 
     def close_window(self):
-        """Close the current window."""
         self.root.destroy()
 
     def run(self):
-        """Start the Tkinter event loop."""
         self.root.mainloop()
 
-
-
-
 if __name__ == "__main__":
-    # Uncomment the desired GUI to test it
-    # DisplayBooksGui().run()
-    SearchBooksGui().run()
+    gui = DisplayBooksGui()
+    gui.run()

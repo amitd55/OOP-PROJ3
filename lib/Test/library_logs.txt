@@ -221,3 +221,14 @@
 - Perform Search Successfully completed
 - Search Successfully completed
 - Perform Search Successfully completed
+- Display Books Successfully completed
+- Display Books Successfully completed
+- Display Books Successfully completed
+- Display Books Successfully completed
+- Display Books failed: Invalid filter type. Use 'all', 'popular', 'available', or 'loaned'.
+- Display Books failed: Invalid filter type. Use 'all', 'popular', 'available', or 'loaned'.
+- Display Books Successfully completed
+- Display Books Successfully completed
+- Display Books Successfully completed
+- Display Books Successfully completed
+- Display Books failed: Invalid filter type. Use 'all', 'popular', 'available', or 'loaned'.

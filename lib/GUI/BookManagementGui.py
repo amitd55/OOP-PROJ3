@@ -7,6 +7,7 @@ class BookManagementGui:
         self.book_manager = book_manager
         self.mode = mode
         self.return_callback = return_callback
+        self.books_display = None  # Initialize books_display as None
 
         if return_callback:
             self.root = tk.Toplevel()
@@ -97,14 +98,19 @@ class BookManagementGui:
         view_frame.pack(expand=True, fill="both")
 
     def display_books(self):
-        self.books_display.delete(1.0, tk.END)
-        books = self.book_manager.books
+        # Ensure books_display exists before updating it
+        if self.books_display is not None:
+            self.books_display.delete(1.0, tk.END)
+            books = self.book_manager.books
 
-        if not books:
-            self.books_display.insert(tk.END, "No books available.")
-        else:
-            for book in books:
-                self.books_display.insert(tk.END, f"Title: {book.title}, Author: {book.author}, Copies: {book.copies}, Genre: {book.genre}, Year: {book.year}\n")
+            if not books:
+                self.books_display.insert(tk.END, "No books available.")
+            else:
+                for book in books:
+                    self.books_display.insert(
+                        tk.END,
+                        f"Title: {book.title}, Author: {book.author}, Copies: {book.copies}, Genre: {book.genre}, Year: {book.year}\n"
+                    )
 
     def add_book(self):
         title = self.title_entry.get()
@@ -127,7 +133,7 @@ class BookManagementGui:
         try:
             self.book_manager.add_book(title, author, genre, year, copies)
             messagebox.showinfo("Success", "Book added successfully!")
-            self.display_books()
+            self.display_books()  # Call display_books after adding
         except Exception as e:
             messagebox.showerror("Error", f"Unexpected error: {e}")
 
@@ -139,9 +145,12 @@ class BookManagementGui:
             return
 
         try:
-            self.book_manager.remove_book(title)
+            if not self.book_manager.remove_book(title):
+                messagebox.showerror("Error", f"Book '{title}' does not exist.")
+                return
+
             messagebox.showinfo("Success", "Book removed successfully!")
-            self.display_books()
+            self.display_books()  # Call display_books after removing
         except Exception as e:
             messagebox.showerror("Error", f"Unexpected error: {e}")
 

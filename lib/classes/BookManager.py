@@ -77,7 +77,14 @@ class BookManager:
     def remove_book(self, title):
         """Remove a book by title."""
         try:
+            existing_book_count = len(self.books)
             self.books = [book for book in self.books if book.title != title]
+
+            if len(self.books) == existing_book_count:
+                # No book was removed
+                print(f"No book with title '{title}' found.")
+                return False
+
             self.save_books()
             return True
         except Exception as e:
